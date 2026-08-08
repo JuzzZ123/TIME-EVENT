@@ -3,109 +3,549 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EVENT COUNTDOWN</title>
+
     <style>
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #043899 0%, #c9d9f5 100%);
+
+            background: linear-gradient(
+                135deg,
+                #043899 0%,
+                #c9d9f5 100%
+            );
+
             color: #ffffff;
+
+            min-height: 100vh;
+            min-height: 100dvh;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+
+            padding: 16px;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.16);
+
+            padding: clamp(20px, 5vw, 45px);
+
+            border-radius: 15px;
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        h1 {
+            width: 100%;
+
+            margin: 0 0 25px 0;
+
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
+
+            line-height: 1.2;
+
+            text-align: center;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        /* =========================================
+           COUNTDOWN
+        ========================================= */
+
+        .countdown {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: clamp(6px, 2vw, 20px);
+
             margin: 0;
         }
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        .countdown {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
+
+
+        /* =========================================
+           TIME BOX
+        ========================================= */
+
         .time-box {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px 25px;
+            width: 100%;
+            min-width: 0;
+
+            background: rgba(0, 0, 0, 0.20);
+
+            padding: clamp(12px, 3vw, 20px)
+                     clamp(5px, 2vw, 20px);
+
             border-radius: 10px;
-            min-width: 80px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
         }
+
+
+        /* =========================================
+           NUMBER
+        ========================================= */
+
         .number {
-            font-size: 3rem;
-            font-weight: bold;
             display: block;
+
+            font-size: clamp(
+                1.6rem,
+                7vw,
+                3.5rem
+            );
+
+            font-weight: bold;
+
+            line-height: 1;
+
+            font-variant-numeric: tabular-nums;
+
+            white-space: nowrap;
         }
+
+
+        /* =========================================
+           LABEL
+        ========================================= */
+
         .label {
-            font-size: 0.9rem;
+            display: block;
+
+            margin-top: 7px;
+
+            font-size: clamp(
+                0.5rem,
+                2vw,
+                0.9rem
+            );
+
             text-transform: uppercase;
+
             letter-spacing: 1px;
+
             color: #ddd;
+
+            white-space: nowrap;
         }
+
+
+        /* =========================================
+           EVENT STARTED
+        ========================================= */
+
+        .countdown h2 {
+            margin: 0;
+
+            font-size: clamp(
+                1.1rem,
+                5vw,
+                2rem
+            );
+        }
+
+
+        /* =========================================
+           SMALL PHONES
+           390px AND BELOW
+        ========================================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 100%;
+
+                padding: 24px 12px;
+
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+
+                margin-bottom: 20px;
+            }
+
+            .countdown {
+                gap: 6px;
+            }
+
+            .time-box {
+                padding: 14px 3px;
+
+                border-radius: 8px;
+            }
+
+            .number {
+                font-size: 1.8rem;
+            }
+
+            .label {
+                font-size: 0.52rem;
+
+                letter-spacing: 0.5px;
+
+                margin-top: 6px;
+            }
+        }
+
+
+        /* =========================================
+           VERY SMALL PHONES
+           350px AND BELOW
+        ========================================= */
+
+        @media (max-width: 350px) {
+
+            body {
+                padding: 6px;
+            }
+
+            .container {
+                padding: 20px 8px;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+
+                margin-bottom: 16px;
+            }
+
+            .countdown {
+                gap: 4px;
+            }
+
+            .time-box {
+                padding: 12px 2px;
+
+                border-radius: 7px;
+            }
+
+            .number {
+                font-size: 1.45rem;
+            }
+
+            .label {
+                font-size: 0.45rem;
+
+                letter-spacing: 0.3px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE LANDSCAPE
+        ========================================= */
+
+        @media (
+            max-height: 500px
+        ) and (
+            orientation: landscape
+        ) {
+
+            body {
+                padding: 10px 20px;
+            }
+
+            .container {
+                max-width: 900px;
+
+                padding: 18px 25px;
+            }
+
+            h1 {
+                font-size: clamp(
+                    1.3rem,
+                    6vh,
+                    2.2rem
+                );
+
+                margin-bottom: 15px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .time-box {
+                padding: 10px;
+            }
+
+            .number {
+                font-size: clamp(
+                    1.8rem,
+                    10vh,
+                    3rem
+                );
+            }
+
+            .label {
+                font-size: clamp(
+                    0.55rem,
+                    2.5vh,
+                    0.8rem
+                );
+
+                margin-top: 5px;
+            }
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (min-width: 481px) and (max-width: 1024px) {
+
+            .container {
+                width: 95%;
+            }
+
+            .number {
+                font-size: clamp(
+                    2rem,
+                    6vw,
+                    3.5rem
+                );
+            }
+        }
+
+
+        /* =========================================
+           DESKTOP
+        ========================================= */
+
+        @media (min-width: 1025px) {
+
+            .container {
+                max-width: 900px;
+            }
+
+            .countdown {
+                gap: 20px;
+            }
+
+            .time-box {
+                padding: 20px;
+            }
+
+            .number {
+                font-size: 3.5rem;
+            }
+        }
+
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1 id="title">EventCountdown Para sayo UM</h1>
-    <div class="countdown">
-        <div class="time-box"><span class="number" id="days">00</span><span class="label">Days</span></div>
-        <div class="time-box"><span class="number" id="hours">00</span><span class="label">Hours</span></div>
-        <div class="time-box"><span class="number" id="minutes">00</span><span class="label">Mins</span></div>
-        <div class="time-box"><span class="number" id="seconds">00</span><span class="label">Secs</span></div>
+    <div class="container">
+
+        <h1 id="title">
+            EventCountdown Para sayo UM
+        </h1>
+
+        <div class="countdown">
+
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Mins</span>
+            </div>
+
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Secs</span>
+            </div>
+
+        </div>
+
     </div>
-</div>
 
-<script>
-    // 1. SET YOUR TARGET DATE IN PHILIPPINE TIME HERE
-    // Format: YYYY-MM-DDTHH:MM:SS+08:00
-    // Example below is set to New Year's Eve 2026 midnight Manila Time
-   const targetDateString = "2026-08-16T17:30:00+08:00";  
-    
-    // Parse the target date string into absolute UTC milliseconds
-    const targetDate = Date.parse(targetDateString);
 
-    function updateCountdown() {
-        // Get the current global absolute UTC time milliseconds
-        const now = new Date().getTime();
-        const difference = targetDate - now;
+    <script>
 
-        if (isNaN(targetDate)) {
-            document.querySelector(".container").innerHTML = "<h2>Invalid Date Format!</h2>";
-            clearInterval(timerInterval);
-            return;
+        /* =========================================
+           TARGET DATE
+           PHILIPPINE TIME (UTC+8)
+        ========================================= */
+
+        const targetDateString =
+            "2026-08-16T17:30:00+08:00";
+
+        const targetDate =
+            Date.parse(targetDateString);
+
+
+        /* =========================================
+           UPDATE COUNTDOWN
+        ========================================= */
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+            const difference =
+                targetDate - now;
+
+
+            /* Invalid date */
+
+            if (isNaN(targetDate)) {
+
+                document.querySelector(".container").innerHTML =
+                    "<h2>Invalid Date Format!</h2>";
+
+                clearInterval(timerInterval);
+
+                return;
+            }
+
+
+            /* Event started */
+
+            if (difference <= 0) {
+
+                document.querySelector(".countdown").innerHTML =
+                    "<h2>The Event Has Started!</h2>";
+
+                clearInterval(timerInterval);
+
+                return;
+            }
+
+
+            /* Calculate time */
+
+            const days =
+                Math.floor(
+                    difference /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (difference %
+                    (1000 * 60 * 60 * 24)) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (difference %
+                    (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (difference %
+                    (1000 * 60)) /
+                    1000
+                );
+
+
+            /* Display */
+
+            document.getElementById("days").textContent =
+                days.toString().padStart(2, "0");
+
+
+            document.getElementById("hours").textContent =
+                hours.toString().padStart(2, "0");
+
+
+            document.getElementById("minutes").textContent =
+                minutes.toString().padStart(2, "0");
+
+
+            document.getElementById("seconds").textContent =
+                seconds.toString().padStart(2, "0");
         }
 
-        if (difference <= 0) {
-            document.querySelector(".countdown").innerHTML = "<h2>The Event Has Started!</h2>";
-            clearInterval(timerInterval);
-            return;
-        }
 
-        // Time calculations for days, hours, minutes and seconds
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        /* =========================================
+           START TIMER
+        ========================================= */
 
-        // Display the results with leading zeros
-        document.getElementById("days").innerText = days.toString().padStart(2, '0');
-        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-    }
+        const timerInterval =
+            setInterval(updateCountdown, 1000);
 
-    // Update the count down every 1 second
-    const timerInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Run immediately on load
-</script>
+        updateCountdown();
+
+    </script>
 
 </body>
 </html>
